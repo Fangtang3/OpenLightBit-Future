@@ -1,0 +1,3 @@
+name: OpenLightBit
+main: am9.openLightBit.bukkit.BukkitMain
+version: 1.0-SNAPSHOT
