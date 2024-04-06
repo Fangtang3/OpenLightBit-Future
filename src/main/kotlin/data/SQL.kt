@@ -8,6 +8,7 @@ class SQL {
         lateinit var c: Connection
         lateinit var s: Statement
         fun main() {
+            s = c.createStatement()
             //from 2kbit-java
             val sql = arrayOf<String>(
                 java.lang.String.format(
@@ -119,6 +120,29 @@ class SQL {
                               `egg` INT NOT NULL DEFAULT 0 COMMENT '鸡蛋数量',
                               `yeast` INT NOT NULL DEFAULT 0 COMMENT '酵母数量',
                               `last_produce` bigint NOT NULL DEFAULT '946656000' COMMENT '上次完成一轮生产周期时间',
+                              PRIMARY KEY (`id`));
+                            
+                            """.trimIndent(), ConfigYaml.cloudConfig["mysql-dbname"]
+                ),
+                java.lang.String.format(
+                    """
+                            CREATE TABLE IF NOT EXISTS `%s`.`woodenfish` (
+                              `id` int NOT NULL AUTO_INCREMENT,
+                              `uid` varchar(10) NOT NULL COMMENT '赛博账号',
+                              `time` bigint NOT NULL COMMENT '上次计算时间',
+                              `level` int NOT NULL DEFAULT 0 COMMENT '木鱼等级',
+                              `gongde` bigint NOT NULL DEFAULT 0 COMMENT '功德',
+                              `e` double NOT NULL DEFAULT 0 COMMENT 'log10值',
+                              `ee` double NOT NULL DEFAULT 0 COMMENT 'log10^10值',
+                              `nirvana` double NOT NULL DEFAULT 1 COMMENT '涅槃重生次数',
+                              `ban` int NOT NULL DEFAULT 0 COMMENT '封禁状态',
+                              `dt` bigint NOT NULL DEFAULT 946656000 COMMENT '封禁结束时间',
+                              `end_time` bigint NOT NULL DEFAULT 946656000 COMMENT '最近一次敲木鱼时间',
+                              `hit_count` int NOT NULL DEFAULT 0 COMMENT '敲木鱼次数',
+                              `info_time` bigint NOT NULL DEFAULT 0 COMMENT '最近一次信息查询时间',
+                              `info_count` int NOT NULL DEFAULT 0 COMMENT '信息查询次数',
+                              `info_ctrl` bigint NOT NULL DEFAULT 946656000 COMMENT '信息查询限制结束时间',
+                              `total_ban` int NOT NULL DEFAULT 0 COMMENT '累计封禁次数',
                               PRIMARY KEY (`id`));
                             
                             """.trimIndent(), ConfigYaml.cloudConfig["mysql-dbname"]

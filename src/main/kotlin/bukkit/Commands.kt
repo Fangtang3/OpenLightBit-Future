@@ -1,6 +1,7 @@
 package am9.openLightBit.bukkit
 
 import am9.openLightBit.Main
+import am9.openLightBit.core.Info
 import am9.openLightBit.core.Menu
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -28,7 +29,10 @@ class Commands: CommandExecutor {
             return false
         }
         if (p3[1] == "call") {
-            Bukkit.broadcastMessage(p3[2] + " 机器人正在召唤你")
+            Bukkit.broadcastMessage(p3[2] + " 机器人正在呼唤你")
+        }
+        if (p3[1] == "info") {
+            sender.sendMessage(Info.getInfo())
         }
         return true
     }

@@ -48,10 +48,15 @@ class ConfigYaml {
             }
         }
         fun mainConfig(path: String) {
-            val cloudConfigFile: File = File("$path/config.yaml")
+            val configYaml: String = if (Main.platform == "Minecraft-Bukkit") {
+                "config.yml"
+            } else {
+                "config.yaml"
+            }
+            val configFile: File = File("$path/$configYaml")
             inputStream = this.javaClass
                 .classLoader
-                .getResourceAsStream("$path/config.yaml") as InputStream
+                .getResourceAsStream("$path/$configYaml") as InputStream
             val writer = StringWriter()
             try {
                 cloudConfig = snakeYaml.load(inputStream)
@@ -63,7 +68,7 @@ class ConfigYaml {
                     "version: 1" +
                             "group-if-bukkit: 10"
                 assertEquals(configYaml, writer.toString())
-                cloudConfigFile.writeText(configYaml)
+                configFile.writeText(configYaml)
                 Main.sendMessage("请编辑配置文件！")
                 Main.newbie = true
             }

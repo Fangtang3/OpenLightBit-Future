@@ -1,11 +1,10 @@
 package am9.openLightBit
 
 import am9.openLightBit.data.ConfigYaml
+import am9.openLightBit.data.MySQL
 import am9.openLightBit.data.SQL
 import am9.openLightBit.data.Sqlite3
 import org.apache.logging.log4j.LogManager
-import org.bukkit.Bukkit
-import java.io.ObjectInputFilter.Config
 
 class Main {
     fun main() {
@@ -18,7 +17,7 @@ class Main {
     }
     companion object {
         val version = "9"
-        var newbie = false;
+        var newbie = false
         lateinit var platform: String
         private val logger: org.apache.logging.log4j.Logger? = LogManager.getLogger("OpenLightBit")
         fun sendMessage(msg: String) {
@@ -32,7 +31,10 @@ class Main {
             if (ConfigYaml.cloudConfig["use-mysql"] == false) {
                 Sqlite3.connect(sqLiteFile)
             } else {
-                TODO()
+                MySQL.connect(ConfigYaml.cloudConfig["mysql-host"] as String +
+                        ":" + ConfigYaml.cloudConfig["mysql-port"],
+                    ConfigYaml.cloudConfig["mysql-user"] as String,
+                    ConfigYaml.cloudConfig["mysql-password"] as String)
             }
             //执行SQL语句
             SQL.main()
