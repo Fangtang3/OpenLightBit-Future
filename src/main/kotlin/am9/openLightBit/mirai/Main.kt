@@ -1,6 +1,7 @@
 package am9.openLightBit.mirai
 
 import am9.olbcore.Core
+import am9.olbcore.UniversalLogger
 import am9.openLightBit.Main
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder
@@ -35,7 +36,7 @@ class Main(description: JvmPluginDescription) : KotlinPlugin(description) {
                 } catch (e: NotImplementedError) {
                     group.sendMessage("未实现")
                 } catch (e: Exception) {
-                    group.sendMessage("出错了！" + e.message)
+                    UniversalLogger.error("出错了！" + e.message)
                 }
             }
         }
