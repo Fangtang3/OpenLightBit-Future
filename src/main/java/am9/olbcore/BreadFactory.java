@@ -6,11 +6,11 @@ import static am9.olbcore.Bread.query;
 import static java.lang.Integer.parseInt;
 
 public class BreadFactory {
-    public static Integer giveBread(Integer number, Integer gid) {
+    public static Integer giveBread(Integer number, Integer gid) throws BreadException {
         try {
             Statement s = Database.c.createStatement();
             if (query(gid).get(0) + number < 50 * query(gid).get(1)) {
-                return 50 * query(gid).get(1);
+                throw new BreadException("仓库满了！");
             } else if (number < 1) {
                 throw new IllegalArgumentException("给你面包 数量不能小于1！");
             } else {
@@ -24,11 +24,11 @@ public class BreadFactory {
             return -1;
         }
     }
-    public static Integer getBread(Integer number, Integer gid) {
+    public static Integer getBread(Integer number, Integer gid) throws BreadException, IllegalArgumentException {
         try {
             Statement s = Database.c.createStatement();
             if (query(gid).get(0) < number) {
-                return 0;
+                throw new BreadException("没有那么多面包！");
             } else if (number < 1) {
                 throw new IllegalArgumentException("来份面包 数量不能小于1！");
             } else {
@@ -38,7 +38,7 @@ public class BreadFactory {
                 return number;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            UniversalLogger.Companion.error(e.getMessage());
             return -1;
         }
     }
@@ -47,7 +47,7 @@ public class BreadFactory {
             Statement s = am9.olbcore.Database.c.createStatement();
             s.execute("insert into bread (group, breads) VALUES (" + gid + ", 30)");
         } catch (SQLException e) {
-            e.printStackTrace();
+            UniversalLogger.Companion.error(e.getMessage());
         }
     }
 }

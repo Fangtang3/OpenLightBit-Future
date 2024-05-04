@@ -1,13 +1,12 @@
 package am9.openLightBit.data
 
+import am9.olbcore.Core
 import am9.openLightBit.Main
 import org.yaml.snakeyaml.Yaml
 import java.io.File
 import java.io.InputStream
 import java.io.StringWriter
-import kotlin.system.exitProcess
 import kotlin.test.assertEquals
-
 
 class ConfigYaml {
     companion object {
@@ -17,7 +16,7 @@ class ConfigYaml {
         private val snakeYaml: Yaml = Yaml()
         fun cloudConfig(path: String) {
             //lateinit var cloudConfig: MutableMap<String, Any>
-            val cloudConfigFile: File = File("$path/cloud.yaml")
+            val cloudConfigFile = File("$path/cloud.yaml")
             inputStream = this.javaClass
                 .classLoader
                 .getResourceAsStream("$path/cloud.yaml") as InputStream
@@ -48,12 +47,12 @@ class ConfigYaml {
             }
         }
         fun mainConfig(path: String) {
-            val configYaml: String = if (Main.platform == "Minecraft-Bukkit") {
+            val configYaml: String = if (Core.platform == "Minecraft-Bukkit") {
                 "config.yml"
             } else {
                 "config.yaml"
             }
-            val configFile: File = File("$path/$configYaml")
+            val configFile = File("$path/$configYaml")
             inputStream = this.javaClass
                 .classLoader
                 .getResourceAsStream("$path/$configYaml") as InputStream
@@ -64,11 +63,11 @@ class ConfigYaml {
                 cloudConfig["version"] = 1
                 cloudConfig["group-if-bukkit"] = 10
                 snakeYaml.dump(cloudConfig, writer)
-                val configYaml =
+                val configYamlSample =
                     "version: 1" +
                             "group-if-bukkit: 10"
-                assertEquals(configYaml, writer.toString())
-                configFile.writeText(configYaml)
+                assertEquals(configYamlSample, writer.toString())
+                configFile.writeText(configYamlSample)
                 Main.sendMessage("请编辑配置文件！")
                 Main.newbie = true
             }

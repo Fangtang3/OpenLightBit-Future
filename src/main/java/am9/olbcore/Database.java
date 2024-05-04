@@ -16,7 +16,7 @@ public class Database {
             connect(DriverManager.getConnection(url, user, pswd));
             dbname = url.split("/")[url.split("/").length - 1];
         } catch (SQLException e) {
-            e.printStackTrace();
+            UniversalLogger.Companion.error(e.getMessage());
         }
     }
     public static void init() {
@@ -47,7 +47,7 @@ public class Database {
             s.execute("create table if not exists global_whitelist (id int not null)");
             s.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            UniversalLogger.Companion.error(e.getMessage());
         }
     }
 }

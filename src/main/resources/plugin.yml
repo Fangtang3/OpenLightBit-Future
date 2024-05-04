@@ -2,3 +2,7 @@ name: OpenLightBit
 main: am9.openLightBit.bukkit.BukkitMain
 version: 9.0-SNAPSHOT
 api-version: 1.13
+commands:
+  olb:
+    description: OpenLightBit
+    usage: /olb

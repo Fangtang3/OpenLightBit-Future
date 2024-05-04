@@ -1,5 +1,6 @@
 package am9.openLightBit
 
+import am9.olbcore.Core
 import am9.openLightBit.data.ConfigYaml
 import am9.openLightBit.data.MySQL
 import am9.openLightBit.data.SQL
@@ -8,7 +9,7 @@ import org.apache.logging.log4j.LogManager
 
 class Main {
     fun main() {
-        platform = "terminal"
+        Core.platform = "terminal"
         sendMessage(
             "OpenLightBit" +
             version +
@@ -18,7 +19,6 @@ class Main {
     companion object {
         val version = "9"
         var newbie = false
-        lateinit var platform: String
         var bukkitGroup: Int? = null
         private val logger: org.apache.logging.log4j.Logger? = LogManager.getLogger("OpenLightBit")
         fun sendMessage(msg: String) {
@@ -38,7 +38,11 @@ class Main {
                     ConfigYaml.cloudConfig["mysql-password"] as String)
             }
             //执行SQL语句
-            SQL.main()
+            if (!newbie) {
+                SQL.main()
+            } else {
+                logger?.fatal("请先修改配置文件！")
+            }
         }
     }
 }

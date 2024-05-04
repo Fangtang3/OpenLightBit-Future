@@ -1,8 +1,7 @@
 package am9.olbcore;
 
-import javax.xml.crypto.Data;
-import java.sql.SQLException;
 import java.sql.Statement;
+import am9.olbcore.UniversalLogger;
 
 public class Account {
     public static void create(String name, Integer uid) {
@@ -13,7 +12,7 @@ public class Account {
             if (am9.olbcore.Database.c == null) {
                 throw new NullPointerException("未连接数据库");
             } else {
-                e.printStackTrace();
+                UniversalLogger.Companion.error(e.getMessage());
             }
         }
     }
