@@ -1,6 +1,7 @@
 package am9.openLightBit
 
 import am9.olbcore.Core
+import am9.olbcore.UniversalLogger
 import am9.openLightBit.data.ConfigYaml
 import am9.openLightBit.data.MySQL
 import am9.openLightBit.data.SQL
@@ -20,9 +21,8 @@ class Main {
         val version = "9"
         var newbie = false
         var bukkitGroup: Int? = null
-        private val logger: org.apache.logging.log4j.Logger? = LogManager.getLogger("OpenLightBit")
         fun sendMessage(msg: String) {
-            logger?.info(msg)
+            UniversalLogger.info(msg)
         }
         fun mainProgress(sqLiteFile: String, yamlLocation: String) {
             //读取配置文件
@@ -41,7 +41,7 @@ class Main {
             if (!newbie) {
                 SQL.main()
             } else {
-                logger?.fatal("请先修改配置文件！")
+                UniversalLogger.error("请先修改配置文件！")
             }
         }
     }

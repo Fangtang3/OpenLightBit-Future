@@ -1,7 +1,6 @@
 package am9.openLightBit.bukkit
 
-import am9.olbcore.Info
-import am9.olbcore.Menu
+import am9.olbcore.*
 import am9.openLightBit.Main
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -11,8 +10,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.lang.IllegalArgumentException
-import am9.olbcore.BreadException
-import am9.olbcore.UniversalLogger
+import kotlin.random.Random
 
 class Commands: CommandExecutor {
     override fun onCommand(p0: CommandSender, p1: Command, p2: String, p3: Array<out String>): Boolean {
@@ -53,7 +51,16 @@ class Commands: CommandExecutor {
             sender.sendMessage(Info.getInfo())
         }
         if (p3[0] == "register") {
-            am9.olbcore.Account.create(p3[1], 222)
+            if (Account.query(sender.name) == -1) {
+                var id = Random.nextInt(900000) + 100000
+                while (Account.query(id) != "nothing") {
+                    id = Random.nextInt(900000) + 100000
+                }
+                Account.create(sender.name, id)
+                sender.sendMessage("注册成功！")
+            } else {
+                sender.sendMessage("你已经注册过了！")
+            }
         }
         if (p3[0] == "bread") {
             if (p3[1] == "give") {

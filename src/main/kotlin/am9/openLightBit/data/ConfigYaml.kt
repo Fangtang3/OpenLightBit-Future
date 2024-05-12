@@ -20,19 +20,9 @@ class ConfigYaml {
             inputStream = this.javaClass
                 .classLoader
                 .getResourceAsStream("$path/cloud.yaml") as InputStream
-            val writer = StringWriter()
             try {
                 cloudConfig = snakeYaml.load(inputStream)
             } catch (e: java.io.FileNotFoundException) {
-                cloudConfig["use-mysql"] = true
-                cloudConfig["mysql-host"] = "localhost"
-                cloudConfig["mysql-port"] = 3306
-                cloudConfig["mysql-user"] = "root"
-                cloudConfig["mysql-password"] = "openlightbit"
-                cloudConfig["mysql-dbname"] = "mica"
-                cloudConfig["valkey-host"] = "localhost"
-                cloudConfig["valkey-port"] = 6379
-                snakeYaml.dump(cloudConfig, writer)
                 val cloudConfigYaml =
                     "use-mysql: true\n" +
                             "mysql-host: localhost\n" +
@@ -41,7 +31,6 @@ class ConfigYaml {
                             "mysql-password: openlightbit\n" +
                             "valkey-host: localhost\n" +
                             "valkey-port: 6379\n"
-                assertEquals(cloudConfigYaml, writer.toString())
                 cloudConfigFile.writeText(cloudConfigYaml)
                 Main.sendMessage("请编辑配置文件！")
             }
@@ -60,13 +49,9 @@ class ConfigYaml {
             try {
                 cloudConfig = snakeYaml.load(inputStream)
             } catch (e: java.io.FileNotFoundException) {
-                cloudConfig["version"] = 1
-                cloudConfig["group-if-bukkit"] = 10
-                snakeYaml.dump(cloudConfig, writer)
                 val configYamlSample =
                     "version: 1" +
                             "group-if-bukkit: 10"
-                assertEquals(configYamlSample, writer.toString())
                 configFile.writeText(configYamlSample)
                 Main.sendMessage("请编辑配置文件！")
                 Main.newbie = true

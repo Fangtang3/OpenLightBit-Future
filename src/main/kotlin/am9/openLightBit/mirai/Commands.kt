@@ -8,7 +8,7 @@ import net.mamoe.mirai.Mirai
 import net.mamoe.mirai.contact.Group
 class Commands {
     //简单移植
-    suspend fun commandGroup(qq: Long, sender: Group, p3: List<String>): Boolean {
+    suspend fun commandGroup(qq: Long, sender: Group, p3: List<String>) {
         if (p3[0] == "/olb") {
             if (p3[1] == "menu" || p3[1] == "help" || p3[1] == "") {
                 sender.sendMessage(Menu.getMenu())
@@ -24,7 +24,6 @@ class Commands {
             }
             if (p3[1] == "mute") {
                 sender.sendMessage("该平台下不能使用禁言！")
-                return false
             }
             if (p3[1] == "call") {
                 sender.sendMessage(" 机器人正在呼唤你")
@@ -33,7 +32,11 @@ class Commands {
                 sender.sendMessage(Info.getInfo())
             }
             if (p3[1] == "register") {
-                am9.olbcore.Account.create(p3[1], 222)
+                if (am9.olbcore.Account.query(qq.toInt()) == "nothing") {
+                    am9.olbcore.Account.create(p3[1], qq.toInt())
+                } else {
+                    sender.sendMessage("你已经注册过了！")
+                }
             }
             if (p3[1] == "bread") {
                 if (p3[2] == "give") {
@@ -42,10 +45,8 @@ class Commands {
                         sender.sendMessage("给予了" + p3[3] + "个面包，仓库现在有" + currentBread + "个面包")
                     } catch (e: BreadException) {
                         sender.sendMessage("面包太多了！")
-                        return false
                     } catch (e: IllegalArgumentException) {
                         sender.sendMessage("面包数量不能为0！")
-                        return false
                     }
                 }
                 if (p3[2] == "get") {
@@ -54,10 +55,8 @@ class Commands {
                         sender.sendMessage("面包 x$getBread")
                     } catch (e: BreadException) {
                         sender.sendMessage("面包不够！")
-                        return false
                     } catch (e: IllegalArgumentException) {
                         sender.sendMessage("面包数量不能为0！")
-                        return false
                     }
                 }
                 if (p3[2] == "build") {
@@ -66,11 +65,8 @@ class Commands {
                 }
             }
             if (p3[1] == "woodenfish") {
-                return true
+                TODO()
             }
-            return true
-        } else {
-            return false
         }
     }
 }

@@ -7,6 +7,7 @@ import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescriptionBuilder
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.event.GlobalEventChannel.subscribeAlways
+import net.mamoe.mirai.event.events.FriendMessageEvent
 import net.mamoe.mirai.event.events.GroupMessageEvent
 import org.apache.logging.log4j.LogManager
 
@@ -32,13 +33,16 @@ class Main(description: JvmPluginDescription) : KotlinPlugin(description) {
         subscribeAlways<GroupMessageEvent> {
             if (it.message.contentToString().startsWith("/olb")) {
                 try {
-                    am9.openLightBit.mirai.Commands().commandGroup(sender.id, group, message.contentToString().split(" "))
+                    Commands().commandGroup(sender.id, group, message.contentToString().split(" "))
                 } catch (e: NotImplementedError) {
                     group.sendMessage("未实现")
                 } catch (e: Exception) {
                     UniversalLogger.error("出错了！" + e.message)
                 }
             }
+        }
+        subscribeAlways<FriendMessageEvent> {
+            sender.sendMessage("OpenLightBit")
         }
     }
 }
