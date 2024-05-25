@@ -1,4 +1,5 @@
 plugins {
+    id("java")
     kotlin("jvm") version "1.9.24"
 }
 
@@ -20,7 +21,9 @@ dependencies {
     compileOnly("net.mamoe:mirai-core:2.16.0") // mirai-core 的 API
     compileOnly("net.mamoe:mirai-console:2.16.0") // 后端
     testImplementation("net.mamoe:mirai-console-terminal:2.16.0") // 前端, 用于启动测试
-    compileOnly("org.spigotmc:spigot-api:1.20.5-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.20.6-R0.1-SNAPSHOT") {
+        force = true
+    }
     implementation("org.xerial:sqlite-jdbc:3.45.3.0")
     implementation("org.mariadb.jdbc:mariadb-java-client:3.3.3")
     implementation("org.yaml:snakeyaml:2.2")
@@ -31,6 +34,10 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 kotlin {
     jvmToolchain(11)
