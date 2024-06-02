@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    kotlin("jvm") version "1.9.24"
+    kotlin("jvm") version "2.0.0"
 }
 
 
@@ -25,9 +25,9 @@ dependencies {
     implementation("org.xerial:sqlite-jdbc:3.45.3.0")
     implementation("org.mariadb.jdbc:mariadb-java-client:3.3.3")
     implementation("org.yaml:snakeyaml:2.2")
-    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:2.0.0-RC1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0-RC1")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.0.0-RC1")
+    runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:2.0.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
 }
 
 tasks.test {
