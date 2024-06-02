@@ -27,8 +27,10 @@ public class Database {
             }
             s.execute("create table if not exists account (" +
                     "name varchar(255)," +
-                    "id int," +
-                    "banned tinyint)");
+                    "id int not null," +
+                    "banned tinyint," +
+                    "qid bigint," +
+                    "minecraft varchar)");
             s.execute("create table if not exists bread (" +
                     "group int not null comment '群号'," +
                     "breads int not null default '0' comment '面包数量'," +

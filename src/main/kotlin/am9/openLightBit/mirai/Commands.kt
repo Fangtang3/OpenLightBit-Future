@@ -8,7 +8,7 @@ import net.mamoe.mirai.Mirai
 import net.mamoe.mirai.contact.Group
 class Commands {
     //简单移植
-    suspend fun commandGroup(qq: Long, sender: Group, p3: List<String>) {
+    fun commandGroup(qq: Long, sender: Group, p3: List<String>) {
         if (p3[0] == "/olb") {
             if (p3[1] == "menu" || p3[1] == "help" || p3[1] == "") {
                 sender.sendMessage(Menu.getMenu())
@@ -32,8 +32,16 @@ class Commands {
                 sender.sendMessage(Info.getInfo())
             }
             if (p3[1] == "register") {
-                if (am9.olbcore.Account.query(qq.toInt()) == "nothing") {
-                    am9.olbcore.Account.create(p3[1], qq.toInt())
+                if (p3.size < 3) {
+                    sender.sendMessage("无效参数！")
+                }
+                if (Account.queryByName(p3[2]) == -1) {
+                    var id = Random.nextInt(900000) + 100000
+                    while (Account.query(id) != "nothing") {
+                        id = Random.nextInt(900000) + 100000
+                    }
+                    Account.createWithQQ(p3[2], id, qq)
+                    sender.sendMessage("注册成功！")
                 } else {
                     sender.sendMessage("你已经注册过了！")
                 }

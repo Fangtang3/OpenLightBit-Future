@@ -15,13 +15,13 @@ import kotlin.random.Random
 class Commands: CommandExecutor {
     override fun onCommand(p0: CommandSender, p1: Command, p2: String, p3: Array<out String>): Boolean {
         try {
-            return command(p0, p1, p2, p3)
+            return executeCommand(p0, p1, p2, p3)
         } catch (e: IllegalArgumentException) {
             UniversalLogger.error("需要玩家操作！")
             return false
         }
     }
-    fun command(p0: CommandSender, p1: Command, p2: String, p3: Array<out String>): Boolean {
+    fun executeCommand(p0: CommandSender, p1: Command, p2: String, p3: Array<out String>): Boolean {
         lateinit var sender: Player
         if (p0 is Player) {
             sender = p0
@@ -51,12 +51,15 @@ class Commands: CommandExecutor {
             sender.sendMessage(Info.getInfo())
         }
         if (p3[0] == "register") {
-            if (Account.query(sender.name) == -1) {
+            if (p3.size < 2) {
+                sender.sendMessage("无效参数！")
+            }
+            if (Account.query(p3[1]) == -1) {
                 var id = Random.nextInt(900000) + 100000
                 while (Account.query(id) != "nothing") {
                     id = Random.nextInt(900000) + 100000
                 }
-                Account.create(sender.name, id)
+                Account.createWithMC(p3[1], id, sender.name)
                 sender.sendMessage("注册成功！")
             } else {
                 sender.sendMessage("你已经注册过了！")

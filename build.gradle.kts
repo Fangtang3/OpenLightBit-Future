@@ -21,9 +21,7 @@ dependencies {
     compileOnly("net.mamoe:mirai-core:2.16.0") // mirai-core 的 API
     compileOnly("net.mamoe:mirai-console:2.16.0") // 后端
     testImplementation("net.mamoe:mirai-console-terminal:2.16.0") // 前端, 用于启动测试
-    compileOnly("org.spigotmc:spigot-api:1.20.6-R0.1-SNAPSHOT") {
-        force = true
-    }
+    compileOnly("org.spigotmc:spigot-api:1.20.6-R0.1-SNAPSHOT")
     implementation("org.xerial:sqlite-jdbc:3.45.3.0")
     implementation("org.mariadb.jdbc:mariadb-java-client:3.3.3")
     implementation("org.yaml:snakeyaml:2.2")
