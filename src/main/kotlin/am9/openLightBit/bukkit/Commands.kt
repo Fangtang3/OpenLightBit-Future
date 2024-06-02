@@ -54,7 +54,7 @@ class Commands: CommandExecutor {
             if (p3.size < 2) {
                 sender.sendMessage("无效参数！")
             }
-            if (Account.query(p3[1]) == -1) {
+            if (Account.queryByName(p3[1]) == -1) {
                 var id = Random.nextInt(900000) + 100000
                 while (Account.query(id) != "nothing") {
                     id = Random.nextInt(900000) + 100000

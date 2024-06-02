@@ -58,8 +58,7 @@ class Account {
         @JvmStatic
         fun query(uid: Int): String {
             val s = am9.olbcore.Database.c.createStatement()
-            s.execute("SELECT name FROM user WHERE id = $uid")
-            val result = s.executeQuery()
+            val result = s.executeQuery("SELECT name FROM user WHERE id = $uid")
             return if (result.next()) result.getString(1) else "nothing"
         }
 
@@ -67,8 +66,7 @@ class Account {
         @JvmStatic
         fun queryByName(name: String): Int {
             val s = am9.olbcore.Database.c.createStatement()
-            s.execute("SELECT id FROM user WHERE name = $name")
-            val result = s.executeQuery()
+            val result = s.executeQuery("SELECT id FROM user WHERE name = $name")
             return if (result.next()) result.getInt(1) else -1
         }
 

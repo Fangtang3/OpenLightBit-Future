@@ -1,14 +1,16 @@
 package am9.openLightBit.mirai
 
+import am9.olbcore.Account
 import am9.olbcore.BreadException
 import am9.olbcore.Info
 import am9.olbcore.Menu
 import am9.openLightBit.Main
 import net.mamoe.mirai.Mirai
 import net.mamoe.mirai.contact.Group
+import kotlin.random.Random
+
 class Commands {
-    //简单移植
-    fun commandGroup(qq: Long, sender: Group, p3: List<String>) {
+    suspend fun commandGroup(qq: Long, sender: Group, p3: List<String>) {
         if (p3[0] == "/olb") {
             if (p3[1] == "menu" || p3[1] == "help" || p3[1] == "") {
                 sender.sendMessage(Menu.getMenu())
