@@ -1,7 +1,7 @@
 package am9.olbcore
 
 import am9.openLightBit.Main
-import am9.openLightBit.Core
+import am9.olbcore.Core
 
 class Info {
     companion object {

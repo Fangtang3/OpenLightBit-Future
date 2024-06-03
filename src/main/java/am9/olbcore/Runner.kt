@@ -26,8 +26,8 @@ class Runner {
             }
         }
 
-        fun runJavaClass(class: String) {
-            run("java \"$class\"")
+        fun runJavaClass(cls: String) {
+            run("java \"$cls\"")
         }
 
         fun runJarWithMemory(jar: String, xms: Int, xmx: Int, xmn: Int) {
