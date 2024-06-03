@@ -26,8 +26,8 @@ class Runner {
             }
         }
 
-        fun runJar(jar: String) {
-            run("java -jar \"$jar\"")
+        fun runJavaClass(class: String) {
+            run("java \"$class\"")
         }
 
         fun runJarWithMemory(jar: String, xms: Int, xmx: Int, xmn: Int) {
@@ -40,7 +40,8 @@ class Runner {
 
         fun make(dir: String){
             if (System.getProperty("os.name").contains("Windows")) {
-                run("nmake -C $dir")
+                //run("nmake -C $dir")
+                throw RuntimeException("目前不支持make！")
             } else {
                 if (System.getProperty("os.name").contains("Linux")) {
                     try {
