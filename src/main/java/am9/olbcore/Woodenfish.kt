@@ -24,10 +24,10 @@ class Woodenfish {
                 }
             }
         } catch (e: SQLException) {
-            UniversalLogger.error("SQL执行异常" + e.getMessage())
-            throw SQLException("数据库操作失败" + e.getMessage())
+            UniversalLogger.error("SQL执行异常")
+            throw e
         } catch (e: Exception) {
-            UniversalLogger.error("业务逻辑异常" + e.getMessage())
+            UniversalLogger.error("木鱼出现错误")
             throw e
         }
 
