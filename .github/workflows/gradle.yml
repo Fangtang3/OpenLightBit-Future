@@ -49,7 +49,7 @@ jobs:
       uses: actions/upload-artifact@main
       with:
           name: OpenLightBit
-          path: ./OpenLightBit-*.jar
+          path: ./build/libs/OpenLightBit-*.jar
 
   dependency-submission:
 
