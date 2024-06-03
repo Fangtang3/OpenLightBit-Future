@@ -12,7 +12,7 @@ class Runner {
             private set
 
         fun run(command: String) {
-            if (process != null && process.isAlive) {
+            if (process.isAlive) {
                 throw IllegalStateException("进程未结束！")
             } else {
                 lock.lock()

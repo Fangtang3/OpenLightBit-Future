@@ -42,6 +42,15 @@ jobs:
     - name: Build with Gradle 8.3
       run: gradle build
 
+    - name: Configure Git
+      run: git config --global user.email "no-reply@github.com" && git config --global user.name "Github Actions"
+
+    - name: Upload
+      uses: actions/upload-artifact@main
+      with:
+          name: OpenLightBit
+          path: ./OpenLightBit-*.jar
+
   dependency-submission:
 
     runs-on: ubuntu-latest
