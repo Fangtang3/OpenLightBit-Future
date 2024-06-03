@@ -40,7 +40,7 @@ jobs:
         gradle-version: '8.3'
     #
     - name: Build with Gradle 8.3
-      run: gradle build --stacktrace --debug
+      run: gradle build
 
   dependency-submission:
 
