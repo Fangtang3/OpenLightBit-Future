@@ -61,5 +61,14 @@ class World {
                 else -> UniversalLogger.info(message)
             }
         }
+
+        @JvmStatic
+        fun sendMessage(msg: String) {
+            val e = MessageSendRequired(msg)
+            log("info", "Sending message")
+            throw e
+        }
     }
 }
+
+class MessageSendRequired(msg: String): Throwable()
