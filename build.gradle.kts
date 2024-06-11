@@ -12,7 +12,6 @@ repositories {
     maven ("https://maven.aliyun.com/repository/gradle-plugin")
     maven ("https://oss.sonatype.org/content/repositories/snapshots")
     maven ("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
-    //mavenCentral()
 }
 
 dependencies {
@@ -28,6 +27,7 @@ dependencies {
     runtimeOnly("org.jetbrains.kotlin:kotlin-reflect:2.0.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.0.0")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:2.0.0")
+    implementation("org.codehaus.groovy:groovy:3.0.21")
 }
 
 tasks.test {

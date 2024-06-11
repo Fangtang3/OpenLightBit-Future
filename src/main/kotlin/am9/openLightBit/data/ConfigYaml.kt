@@ -25,12 +25,12 @@ class ConfigYaml {
                     Main.sendMessage("请编辑配置文件！")
                     //throw IOException("配置文件不存在，已创建默认配置文件。")
                 }
-                return snakeYaml.load(inputStream) as MutableMap<String, Any>
             } catch (e: Exception) {
                 Main.sendMessage("配置文件加载失败: ${e.message}")
             } finally {
                 inputStream?.close()
             }
+            return snakeYaml.load(inputStream) as MutableMap<String, Any>
         }
 
         fun cloudConfig(path: String) {
