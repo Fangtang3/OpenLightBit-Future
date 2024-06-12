@@ -31,7 +31,9 @@ class World {
         @JvmStatic
         fun execute(command: String) {
             if (command == "me") {
-                UniversalLogger.info("me")
+                UniversalLogger.info("""
+                    
+                """.trimIndent())
             } else {
                 Runner.run(command)
             }

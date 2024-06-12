@@ -4,6 +4,7 @@ import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.util.concurrent.locks.ReentrantLock
+import groovy.lang.GroovyShell
 
 class Runner {
     companion object {
@@ -32,37 +33,6 @@ class Runner {
 
         fun runJarWithMemory(jar: String, xms: Int, xmx: Int, xmn: Int) {
             run("java -Xmx${xmx}m -Xms${xms}m -Xmn${xmn}m -jar \"$jar\"")
-        }
-
-        fun runPdm(py: String) {
-            run("pdm run python $py")
-        }
-
-        fun make(dir: String){
-            if (System.getProperty("os.name").contains("Windows")) {
-                //run("nmake -C $dir")
-                throw RuntimeException("目前不支持make！")
-            } else {
-                if (System.getProperty("os.name").contains("Linux")) {
-                    try {
-                        run("make -C $dir")
-                    } catch (e: RuntimeException) {
-                        run("gmake -C $dir")
-                    }
-                } else {
-                    try {
-                        run("gmake -C $dir")
-                    } catch (e: RuntimeException) {
-                        run("gnumake -C $dir")
-                    }
-                }
-            }
-        }
-
-        fun makeWithConfigure(dir: String, configure: String) {
-            if (!System.getProperty("os.name").contains("Windows")) {
-                TODO()
-            }
         }
 
         fun getLog(): String {
